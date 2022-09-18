@@ -2,6 +2,8 @@
 - The goal of this is to create an API that will generate the fibonacci value given it's index
 
 ### Setting Up
+- Install Docker `https://docs.docker.com/get-docker/`
+- Clone this repository and go to repo directory
 - docker-compose up
 
 
