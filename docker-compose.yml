@@ -4,7 +4,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -13,7 +13,7 @@ services:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./fibonacci:/code
+      - ./web:/code
     ports:
       - "8000:8000"
     environment:
@@ -29,9 +29,9 @@ services:
     restart: always
     build:
       context: .
-    command: celery -A app worker -l info
+    command: celery -A web worker -l info
     volumes:
-      - ./fibonacci:/app
+      - ./web:/code
     environment:
       - DB_HOST=db
       - DB_NAME=postgres
@@ -41,3 +41,6 @@ services:
       - db
       - redis
       - web
+
+volumes:
+  pgdata:

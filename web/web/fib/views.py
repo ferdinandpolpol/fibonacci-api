@@ -3,7 +3,7 @@ from rest_framework import views, permissions
 from .tasks import create_fibonacci
 
 
-class FibonacciApiView(views.ApiView):
+class FibonacciApiView(views.APIView):
 
     permission_classes = (permissions.AllowAny,)
 
