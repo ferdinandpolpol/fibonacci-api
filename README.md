@@ -8,7 +8,7 @@
 
 
 ### Usage
-Send POST data to URL `http://localhost:8000` with body 
+Send POST data to URL `http://localhost:8000/api/fibonacci/` with body 
 ```
 { n: <number> }
 ```
