@@ -1,10 +1,6 @@
-from celery import Celery
+from celery import task
 
-from .models import FibonacciHistory
-
-app = Celery('tasks', broker='redis://localhost')
-
-@app.task
+@task()
 def create_fibonacci(n):
     """
     Description:

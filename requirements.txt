@@ -2,3 +2,6 @@ Django>=3.0,<4.0
 psycopg2>=2.8
 celery==4.4.1
 redis==3.4.1
+djangorestframework
+markdown
+django-filter

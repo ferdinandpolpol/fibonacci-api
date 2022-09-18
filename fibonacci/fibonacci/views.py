@@ -1,9 +1,11 @@
-from rest_framework import views
+from rest_framework import views, permissions
 
 from .tasks import create_fibonacci
 
 
 class FibonacciApiView(views.ApiView):
+
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, *args, **kwargs):
         n = request.data["n"]

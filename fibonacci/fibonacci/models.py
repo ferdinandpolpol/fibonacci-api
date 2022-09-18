@@ -1,5 +1,5 @@
 
-from django.db import models, Max
+from django.db import models
 
 
 class FibonacciHistory(models.Model):
