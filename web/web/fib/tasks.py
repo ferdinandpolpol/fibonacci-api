@@ -1,4 +1,9 @@
+from copy import copy
 from celery import task
+
+from django.db.models import Max
+
+from .models import FibonacciHistory
 
 @task()
 def create_fibonacci(n):
@@ -11,31 +16,35 @@ def create_fibonacci(n):
         None
     """
     # 0,1,1,2,3,5,8,13,etc
-    
+    n = int(n)
     fibs = FibonacciHistory.objects.all()
 
-    current_max = fibs.aggregate(Max('index'))
-    second_max = current_max - 1
+    max_num = fibs.aggregate(Max('index'))
+    current_max = max_num['index__max'] or 0
     
     val1 = 0
     val2 = 1
     if current_max <= 0:
         pass
     else:
-        val1 = fibs.filter(index=current_max).fibonacci_number
-        val2 = fibs.filter(index=second_max).fibonacci_number
-
-
-    current_max 
+        second_max = current_max - 1
+        val1 = fibs.get(index=current_max).fibonacci_number
+        val2 = fibs.get(index=second_max).fibonacci_number
 
     while current_max <= n:
-        fib = val1 + val2
-
+        if current_max == 0:
+            fib = 0
+            val1 = 0
+            val2 = 1
+        else:
+            fib = val1 + val2
+            tmp = copy(val1)
+            val1 = fib
+            val2 = tmp
+            
+        print(f"Creating fib index {current_max} with value {fib}")
         FibonacciHistory.objects.create(
             index=current_max,
             fibonacci_number=fib
         )
-        tmp = copy(val1)
-        val1 = fib
-        val2 = tml
         current_max += 1

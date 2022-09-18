@@ -3,7 +3,9 @@ from django.db import models
 
 
 class FibonacciHistory(models.Model):
-    index = models.IntegerField(help_text="Index of fibonacci")
-    fibonacci_number = models.BigIntegerField(help_text="Actual fibonacci")
+    index = models.IntegerField(unique=True,help_text="Index of fibonacci")
+
+    # Use text field so no int limit
+    fibonacci_number = models.TextField(help_text="Actual fibonacci")
 
 
